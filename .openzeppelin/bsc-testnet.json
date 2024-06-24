@@ -1,0 +1,158 @@
+{
+  "manifestVersion": "3.2",
+  "proxies": [
+    {
+      "address": "0x2865AB9b1A4056CB5732b927807119254639aAfb",
+      "txHash": "0xc6827a69fec0a5c0a52ef52cc02fe598e9f30f7333976d5c6ad4dcf848e9f35c",
+      "kind": "uups"
+    },
+    {
+      "address": "0x6110Ca7c4FfaB207E90e767453Cb9F8711DA46cD",
+      "txHash": "0x3e3aaaf7e40632e17e09f2c0469fa81cc66a499d17c613ce9b58258fa677f2e6",
+      "kind": "uups"
+    },
+    {
+      "address": "0xad3C47a0F79B57923a3f416151b2Fd9b607561fc",
+      "txHash": "0x1ea26bad7caeb64c65cbf259f1af453b788068fd4bbcb63ff6c6a2cc5715cff9",
+      "kind": "uups"
+    },
+    {
+      "address": "0xaf31A2d9c8cb6B3458603302330DF007eeED19dd",
+      "txHash": "0x28a86bff6013fbe4be0a5d692e3dd8ecbc240ceee738c3ea8ab219bd9f30726e",
+      "kind": "uups"
+    },
+    {
+      "address": "0x9dB96b1b73195AFCE37595914018752BFe04BB0e",
+      "txHash": "0xddd9df229ef10f7f04e319a085faffec9261cff73fe094a8518d58b1cd6b2235",
+      "kind": "uups"
+    },
+    {
+      "address": "0xD77F51d80860eF38D16Ad034290cc62567e8725a",
+      "txHash": "0x3503cd903b45f1afe7fc91c7dde4c46c072610ca91d046689d711608418c424b",
+      "kind": "uups"
+    }
+  ],
+  "impls": {
+    "7a3e95138477f222f95d345d8fb44a17114b67afeee351f565edeeae02dffa9e": {
+      "address": "0xD330985766442e23522dE3d649C01F715919a7Cc",
+      "txHash": "0x29871c7de0993abff7e5d28c4b40cae4e33e17750975b1d4c308c51a91d52f4e",
+      "layout": {
+        "solcVersion": "0.8.24",
+        "storage": [
+          {
+            "label": "swapRouter",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_contract(IUniswapV2Router02)1965",
+            "contract": "Swapper",
+            "src": "contracts\\Swapper.sol:35"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)65_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)14_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)195_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_contract(IUniswapV2Router02)1965": {
+            "label": "contract IUniswapV2Router02",
+            "numberOfBytes": "20"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin\\contracts-upgradeable\\utils\\ReentrancyGuardUpgradeable.sol:40",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin\\contracts-upgradeable\\access\\OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin\\contracts-upgradeable\\proxy\\utils\\Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
