@@ -28,11 +28,8 @@ async function main() {
     console.log("Deploy fee:", deployFee)
 
     // const tokenAddress = "0x7169d38820dfd117c3fa1f22a697dba58d90ba06"; // replace with the actual token address
-    const tokenAddress = "0x7169d38820dfd117c3fa1f22a697dba58d90ba06"; // Replace with the token address you want to swap to
-    const minAmount = parseUnits("1", 18); // Minimum amount of tokens expected (replace as needed)
-    const valueToSend = parseEther("0.01"); // Ether to send (replace as needed)
-    const swapTx = await swapper.swapEtherToToken(tokenAddress, minAmount, { value: valueToSend });
-    console.log(swapTx)
+    // const minAmount = parseUnits("1.0", 18); // replace with the actual minimum amount required
+    // const swapTx = await swapper.swapEtherToToken({ value: parseEther("0.01") });
     // const swapReceipt = await swapTx.wait()
     // const swapHash = swapReceipt.
     // const txResult = await tx.wait();
