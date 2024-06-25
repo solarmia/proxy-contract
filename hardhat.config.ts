@@ -2,7 +2,7 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "@openzeppelin/hardhat-upgrades";
 
-import { alchemyKey, apiKey, privateKey } from "./config";
+import { alchemyKey, apiKey, chainId, privateKey, rpcURL } from "./config";
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
@@ -19,13 +19,13 @@ const config: HardhatUserConfig = {
   networks: {
     hardhat: {},
     bsctest: {
-      url: `https://data-seed-prebsc-1-s1.bnbchain.org:8545`,
-      chainId: 97,
+      url: rpcURL.bsctest,
+      chainId: chainId.bsctest,
       accounts: [privateKey],
     },
     sepolia: {
-      url: `https://eth-sepolia.g.alchemy.com/v2/${alchemyKey}`,
-      chainId: 11155111,
+      url: rpcURL.sepolia,
+      chainId: chainId.sepolia,
       accounts: [privateKey],
     },
   },

@@ -1,39 +1,47 @@
-import { ethers, upgrades } from 'hardhat';
-import { swapRouterAddresses } from '../config';
-import { parseEther, parseUnits } from 'ethers';
+import { privateKey, rpcURL, swapRouterAddresses, usdtAddress } from '../config';
+import { Contract, JsonRpcProvider, Wallet, formatEther, parseEther, parseUnits } from 'ethers';
+import fs from 'fs'
 
 async function main() {
-    const provider = ethers.provider
-    const [deployer] = await ethers.getSigners();
+    // Load the address of the deployed proxy from JSON file
+    const contractAddress = JSON.parse(fs.readFileSync('deployedAddress.json', 'utf-8'))
 
-    console.log("Deploying contracts with the account:", deployer.address);
-    const balance = await provider.getBalance(deployer.address)
+    // Initialize provider and wallet using JSON RPC provider and private key
+    const provider = new JsonRpcProvider(rpcURL.sepolia);
+    const wallet = new Wallet(privateKey, provider);
 
-    console.log("Account balance:", balance.toString());
+    // Load contract ABI from local artifact file
+    const artifact = JSON.parse(fs.readFileSync('artifacts/contracts/Swapper.sol/Swapper.json', 'utf-8'))
+    const abi = artifact.abi
 
-    const Swapper = await ethers.getContractFactory("Swapper");
-    const swapRouterAddress = swapRouterAddresses.sepolia; // Replace with the actual Uniswap V2 Router address
+    // Connect to the deployed contract using its address, ABI, and wallet
+    const contract = new Contract(contractAddress, abi, wallet);
 
-    // Deploy the proxy, initializing with the Uniswap V2 Router address
-    const swapper = await upgrades.deployProxy(Swapper, [swapRouterAddress], { initializer: 'initialize' });
-    const deployTx = swapper.deploymentTransaction()
+    // Define parameters for the swap function
+    const minAmount = parseUnits("1.0", 18); // Replace with the minimum amount of tokens you want to receive
+    const ethAmount = parseEther("0.1"); // Replace with the amount of ETH you want to send
 
-    console.log("Swapper deployed to:", await swapper.getAddress());
-    const deployTransactionHash = deployTx?.hash!
-    const deployTransactionReceipt = await ethers.provider.getTransactionReceipt(deployTransactionHash);
-    const deployGasUsed = deployTransactionReceipt?.gasUsed!;
-    const deployGasPrice = deployTx?.gasPrice!;
+    // Get current gas price from provider
+    const gasPrice = (await provider.getFeeData()).gasPrice!
 
-    const deployFee = deployGasPrice * deployGasUsed
-    console.log("Deploy fee:", deployFee)
+    // Execute the swapEtherToToken function on the contract
+    const tx = await contract.swapEtherToToken(usdtAddress.sepolia, minAmount, {
+        value: ethAmount,
+        gasLimit: 200000, // Optional: specify gas limit
+        gasPrice// Optional: specify gas price
+    });
 
-    // const tokenAddress = "0x7169d38820dfd117c3fa1f22a697dba58d90ba06"; // replace with the actual token address
-    // const minAmount = parseUnits("1.0", 18); // replace with the actual minimum amount required
-    // const swapTx = await swapper.swapEtherToToken({ value: parseEther("0.01") });
-    // const swapReceipt = await swapTx.wait()
-    // const swapHash = swapReceipt.
-    // const txResult = await tx.wait();
-    // console.log("Gas used for swapEtherToToken:", txResult.gasUsed);
+    // Wait for transaction receipt
+    const receipt = await tx.wait();
+
+    // Log the block number where the transaction was mined
+    console.log('Transaction was mined in block', receipt.blockNumber);
+
+    // Calculate gas used and gas fee in wei and ETH
+    const gasUsed = receipt.gasUsed;
+    const gasFee = BigInt(gasUsed) * BigInt(gasPrice);
+    console.log(`Gas Fee: ${gasFee.toString()} wei`);
+    console.log(`Gas Fee: ${formatEther(gasFee)} ETH`);
 }
 
 main().catch((error) => {

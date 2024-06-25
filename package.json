@@ -7,12 +7,12 @@
   "scripts": {
     "build": "npx hardhat compile",
     "test": "npx hardhat test",
+    "calc": "ts-node scripts/calcSwapFee.ts",
     "clean": "npx hardhat clean",
-    "deploy-hardhat": "npx hardhat run ./scripts/deploy.ts --network hardhat",
-    "deploy-bsc-test": "npx hardhat run ./scripts/deploy.ts --network bsctest",
     "deploy-spolia": "npx hardhat run ./scripts/deploy.ts --network sepolia",
-    "upgrade-bsc-test": "npx hardhat run ./scripts/upgrade.ts --network bsctest",
-    "upgrade-spolia": "npx hardhat run ./scripts/upgrade.ts --network sepolia"
+    "upgrade-spolia": "npx hardhat run ./scripts/upgrade.ts --network sepolia",
+    "deploy-bsc-test": "npx hardhat run ./scripts/deploy.ts --network bsctest",
+    "upgrade-bsc-test": "npx hardhat run ./scripts/upgrade.ts --network bsctest"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.6",
